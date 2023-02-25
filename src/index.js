@@ -1,5 +1,4 @@
 const express = require("express");
-
 const app = express();
 const port = 5000;
 var bodyparser = require("body-parser");
@@ -11,9 +10,11 @@ app.use(bodyparser.urlencoded({ extended: true }));
 
 app.use(bodyparser.json());
 
-const router = require("./routes/index.route");
+//const router = require("./routes/index.route");
 
-app.use("/api", router);
+//app.use("/api", router);
+
+const db = require("./db/db");
 
 app.listen(port, () => {
   console.log("envoyé avec sucess !!!");
