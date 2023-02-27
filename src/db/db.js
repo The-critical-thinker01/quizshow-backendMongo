@@ -1,7 +1,7 @@
 const mongoose = require("mongoose");
 
-const dbquiz =
-  "mongodb+srv://ronaldo:prisca@cluster0.1oilhce.mongodb.net/quizshow";
+const dbquiz = "mongodb://localhost:27017/quizshow";
+//  "mongodb+srv://ronaldo:prisca@cluster0.1oilhce.mongodb.net/quizshow";
 
 mongoose.set("strictQuery", false);
 mongoose.connect(dbquiz, () => {

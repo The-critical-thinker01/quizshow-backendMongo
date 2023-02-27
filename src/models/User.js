@@ -1,4 +1,4 @@
-const mongoose = require("mongoose");
+const mongoose = require("../db/db");
 const { isEmail } = require("validator");
 const bcrypt = require("bcrypt");
 
@@ -47,6 +47,6 @@ userSchema.statics.login = async function (email, password) {
   throw Error("incorrect email");
 };
 
-const User = mongoose.model("user", userSchema);
+const User = mongoose.model("users", userSchema);
 
 module.exports = User;

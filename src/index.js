@@ -10,11 +10,8 @@ app.use(bodyparser.urlencoded({ extended: true }));
 
 app.use(bodyparser.json());
 
-//const router = require("./routes/index.route");
-
-//app.use("/api", router);
-
-const db = require("./db/db");
+const router = require("./routes/index.route");
+app.use("/api", router);
 
 app.listen(port, () => {
   console.log("envoyé avec sucess !!!");
