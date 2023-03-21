@@ -14,7 +14,7 @@ const AddUser = async (req, res) => {
     });
     res.send("inseret avec succes");
   } catch (err) {
-    console.log(err);
+    // console.log(err);
     const er = ErrorHandler.handleErrors(err);
     res.status(400).send(er);
   }
@@ -27,7 +27,7 @@ const GetAllUsers = async (req, res) => {
     //result to send to the navigator
     res.send(result);
   } catch (err) {
-    console.log(err);
+    // console.log(err);
     const er = ErrorHandler.handleErrors(err);
     res.status(400).send(er);
   }
@@ -39,7 +39,6 @@ const GetUser = async (req, res) => {
     const result = await userService.findOne({ email });
     res.send(result);
   } catch (err) {
-    console.log(err);
     const er = ErrorHandler.handleErrors(err);
     res.status(400).send(er);
   }
@@ -56,7 +55,6 @@ const createToken = (id) => {
 const LoginUser = async (req, res) => {
   const { email, password } = req.body;
   try {
-    console.log(req);
     const user = await userService.login(email, password);
     const token = createToken(user._id);
     //res.cookie("jwt", token, { httpOnly: true, maxAge: maxAge * 1000 });
