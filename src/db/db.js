@@ -1,13 +1,12 @@
 const mongoose = require("mongoose");
 
-const dbquiz = "mongodb://localhost:27017/quizshow";
-//  "mongodb+srv://ronaldo:prisca@cluster0.1oilhce.mongodb.net/quizshow";
-
+const dbquiz = "mongodb+srv://rivaldes:rivaldes@cluster.oialsmt.mongodb.net/?retryWrites=true";
+//const dbquiz = "mongodb://localhost:27017/quizshow";
 mongoose.set("strictQuery", false);
-mongoose.connect(dbquiz, () => {
-  console.log("Connected to MongoDB");
+mongoose.connect(dbquiz, function(err, db) {
+  if (err) throw err;
+  console.log("Database created!");
 });
-
 module.exports = mongoose;
 // const mysql = require("mysql");
 // let db;

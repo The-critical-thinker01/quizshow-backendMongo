@@ -12,7 +12,7 @@ const AddUser = async (req, res) => {
       premon,
       image,
     });
-    res.send("inseret avec succes");
+    res.send("inserer avec succes");
   } catch (err) {
     // console.log(err);
     const er = ErrorHandler.handleErrors(err);
@@ -22,7 +22,6 @@ const AddUser = async (req, res) => {
 
 const GetAllUsers = async (req, res) => {
   try {
-    console.log("hjxhgfxhjfhxdh");
     const result = await userService.find();
     //result to send to the navigator
     res.send(result);
