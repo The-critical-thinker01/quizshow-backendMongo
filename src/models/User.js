@@ -25,6 +25,12 @@ const userSchema = new mongoose.Schema({
     required: [true, "Please enter a password"],
     minlength: [6, "Minimum password length is 6 characters"],
   },
+  quizs: [
+    {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: 'Quizs'
+    }
+  ],
 });
 
 // fire a function before doc saved to db

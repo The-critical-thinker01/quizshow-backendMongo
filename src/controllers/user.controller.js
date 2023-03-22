@@ -11,6 +11,7 @@ const AddUser = async (req, res) => {
       nom,
       premon,
       image,
+      quizs: []
     });
     res.send("inserer avec succes");
   } catch (err) {
@@ -32,10 +33,34 @@ const GetAllUsers = async (req, res) => {
   }
 };
 
+const DeleteAll = async (req, res) => {
+  try {
+    const result = await userService.deleteMany({});
+    //result to send to the navigator
+    
+    res.send(result);
+  } catch (err) {
+    // console.log(err);
+    const er = ErrorHandler.handleErrors(err);
+    res.status(400).send(er);
+  }
+};
+
 const GetUser = async (req, res) => {
   const email = req.params.email; // les parametre pqsser par get sont dans req.param
   try {
     const result = await userService.findOne({ email });
+    res.send(result);
+  } catch (err) {
+    const er = ErrorHandler.handleErrors(err);
+    res.status(400).send(er);
+  }
+};
+
+const GetUserById = async (req, res) => {
+  const id = req.params._id; // les parametre pqsser par get sont dans req.param
+  try {
+    const result = await userService.findById(id);
     res.send(result);
   } catch (err) {
     const er = ErrorHandler.handleErrors(err);
@@ -64,4 +89,4 @@ const LoginUser = async (req, res) => {
   }
 };
 
-module.exports = { GetAllUsers, GetUser, AddUser, LoginUser };
+module.exports = { GetAllUsers, GetUser, AddUser, LoginUser,DeleteAll ,GetUserById};

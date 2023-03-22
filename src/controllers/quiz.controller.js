@@ -1,18 +1,21 @@
 const Quiz = require("../models/Quiz");
 const Question = require("../models/Question");
 const Player = require("../models/Player");
-
+const UserModel = require("../models/User")
 
 const NewQuizz = async (req, res) => {
-    const { name } = req.body; //destructuring de l'objet renvoyé par le front-end
+    const { name, id } = req.body; //destructuring de l'objet renvoyé par le front-end
     try {
+        const user = await UserModel.findById(id);
         const quiz = await Quiz.create({
             name: name,
             Number: 0,
             questions: [],
             players: []
         })
-        res.send(quiz );
+        user.quizs.push(quiz);
+        user.save();
+        res.send(quiz);
     } catch (err) {
         res.status(400).send(err);
     }
@@ -37,13 +40,13 @@ const AddQuestion = async (req, res) => {
 
 const NewPayer = async (req, res) => {
     const id = req.params._id;
-    const { name } = req.body; 
+    const { name } = req.body;
     try {
         const player = await Player.create({ name: name, answers: [] })
         const quiz = await Quiz.findById(id);
         quiz.players.push(player)
         quiz.save();
-        res.send(player );
+        res.send(player);
     } catch (err) {
         console.log(err)
         res.status(400).send(err);
@@ -55,8 +58,8 @@ const AnswerAQuestion = async (req, res) => {
     try {
         const player = await Player.findById(playerId);
         player.answers.push({
-            question:questionId,
-            answer :answer 
+            question: questionId,
+            answer: answer
         })
         player.save();
         res.send(player);
@@ -100,4 +103,4 @@ const GetQuizzById = async (req, res) => {
 };
 
 
-module.exports = { NewQuizz, AddQuestion, GetAllQuizz, GetQuizz, GetQuizzById,NewPayer,AnswerAQuestion };
+module.exports = { NewQuizz, AddQuestion, GetAllQuizz, GetQuizz, GetQuizzById, NewPayer, AnswerAQuestion };

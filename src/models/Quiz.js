@@ -27,6 +27,6 @@ quizSchema.statics.play = async function (player, responses) {
 
 };
 
-const Quiz = mongoose.model("quizs", quizSchema);
+const Quiz = mongoose.model("Quizs", quizSchema);
 
 module.exports = Quiz;
