@@ -8,6 +8,7 @@ router.route("/clear").get(userController.DeleteAll);
 router.route("/:_id").get(userController.GetUserById);
 
 router.route("/adduser").post(userController.AddUser);
+router.route("/changepassword/:_id").post(userController.ChangePassword);
 
 router.route("/login").post(userController.LoginUser);
 

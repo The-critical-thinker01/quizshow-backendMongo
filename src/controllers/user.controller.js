@@ -60,7 +60,20 @@ const GetUser = async (req, res) => {
 const GetUserById = async (req, res) => {
   const id = req.params._id; // les parametre pqsser par get sont dans req.param
   try {
+    const result = await userService.findById(id).populate('quizs');
+    res.send(result);
+  } catch (err) {
+    const er = ErrorHandler.handleErrors(err);
+    res.status(400).send(er);
+  }
+};
+
+const ChangePassword = async (req, res) => {
+  const id = req.params._id; // les parametre pqsser par get sont dans req.param
+  try {
     const result = await userService.findById(id);
+    result.password = req.body.password;
+    result.save();
     res.send(result);
   } catch (err) {
     const er = ErrorHandler.handleErrors(err);
@@ -89,4 +102,4 @@ const LoginUser = async (req, res) => {
   }
 };
 
-module.exports = { GetAllUsers, GetUser, AddUser, LoginUser,DeleteAll ,GetUserById};
+module.exports = { GetAllUsers, GetUser, AddUser, LoginUser,DeleteAll ,GetUserById,ChangePassword};

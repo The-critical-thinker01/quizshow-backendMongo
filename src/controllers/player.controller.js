@@ -16,13 +16,12 @@ const GetPlayer = async (req, res) => {
     }
 };
 
-
-
 const RetryPlay = async (req, res) => {
     const id = req.params._id; // les parametre pqsser par get sont dans req.param
     try {
         const result = await PlayerModel.findById(id);
         result.answers = [];
+        result.numberOfCorectAnswers = 0;
         result.save();
         res.send(result);
     } catch (err) {
@@ -40,4 +39,4 @@ const GetPlayers = async (req, res) => {
 };
 
 
-module.exports = { GetPlayer, GetPlayers ,RetryPlay};
+module.exports = { GetPlayer, GetPlayers, RetryPlay };

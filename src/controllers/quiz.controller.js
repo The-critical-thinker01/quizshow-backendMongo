@@ -42,7 +42,7 @@ const NewPayer = async (req, res) => {
     const id = req.params._id;
     const { name } = req.body;
     try {
-        const player = await Player.create({ name: name, answers: [] })
+        const player = await Player.create({ name: name, answers: [], numberOfCorectAnswers: 0 })
         const quiz = await Quiz.findById(id);
         quiz.players.push(player)
         quiz.save();
@@ -57,6 +57,11 @@ const AnswerAQuestion = async (req, res) => {
     const { playerId, questionId, answer } = req.body;
     try {
         const player = await Player.findById(playerId);
+        const question = await Question.findById(questionId);
+
+        if (question.answer === answer) {
+            player.numberOfCorectAnswers++;
+        }
         player.answers.push({
             question: questionId,
             answer: answer

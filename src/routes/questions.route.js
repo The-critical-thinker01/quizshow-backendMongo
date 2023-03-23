@@ -4,6 +4,7 @@ const router = express.Router({ mergeParams: true });
 const questionController = require("../controllers/question.controller");
 
 router.route("/").get(questionController.GetAllQuestions);
+router.route("/edit/:_id").post(questionController.EditQuestion);
 
 router.route("/:_id").get(questionController.GetQuestion);
 
